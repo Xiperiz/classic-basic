@@ -50,6 +50,8 @@ static void string_into_line_array(char *buffer, struct source_file_t *struct_pt
         else
             iterator++;
     }
+
+    struct_ptr->line_count++;
 }
 
 struct source_file_t * file_to_struct(char *path)
