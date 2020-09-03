@@ -31,6 +31,8 @@ struct basic_program_node_t * create_program_node(enum node_type_e type, struct 
     ret->token_count = token_count;
     ret->literal_line = literal_line;
     ret->basic_line = basic_line;
+    ret->next = NULL;
+    ret->previous = NULL;
 
     return ret;
 }
