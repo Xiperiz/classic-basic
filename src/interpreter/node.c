@@ -17,6 +17,7 @@
 */
 
 #include <stdlib.h>
+#include "../tokenizer/tokenizer.h"
 #include "../helpers/compilers.h"
 #include "node.h"
 
@@ -86,9 +87,16 @@ void free_program_node_list(struct basic_program_node_t *any_node)
     free_program_node(any_node, false);
 }
 
-bool update_program_node_from_literal(__maybe_unused struct basic_program_node_t *target_node)
+bool update_program_node_from_literal(struct basic_program_node_t *target_node)
 {
-    // TODO Update EVERYTHING in the struct from the provided literal
+    struct tokenized_string_t tokenizer_output = tokenize_string(target_node->literal_line);
+    if (tokenizer_output.err)
+        return false;
+
+    target_node->basic_line = tokenizer_output.basic_line;
+    target_node->tokens = tokenizer_output.tokens;
+    target_node->token_count = tokenizer_output.token_count;
+
     return true;
 }
 
