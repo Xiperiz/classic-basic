@@ -33,9 +33,16 @@ struct basic_program_node_t * create_program_node(enum node_type_e type, struct 
     return ret;
 }
 
-void add_to_program_node_list(__maybe_unused struct basic_program_node_t *any_node, __maybe_unused struct basic_program_node_t *node_to_add)
+void add_to_program_node_list(struct basic_program_node_t *any_node, struct basic_program_node_t *node_to_add)
 {
-    // TODO
+    struct basic_program_node_t *temp_ptr = any_node;
+
+    // Find last node to link to
+    while (temp_ptr->next != NULL)
+        temp_ptr = temp_ptr->next;
+
+    temp_ptr->next = node_to_add;
+    node_to_add->previous = temp_ptr;
 }
 
 void free_program_node(struct basic_program_node_t *node, bool relink)
