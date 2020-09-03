@@ -22,28 +22,14 @@
 #include <ctype.h>
 #include "tokenizer.h"
 
-static int get_basic_line_number(char *str)
+static int get_basic_line_number(char *str, char **no_line_string)
 {
-    char *iterator = str;
-    char *line_number_str = (char *)calloc(1024, 1);
+    int basic_line = (int)strtol(str, no_line_string, 10);
 
-    int index = 0;
-    while(isdigit(*iterator) != 0 && *iterator != '\0')
-    {
-        line_number_str[index] = *iterator;
-        index++;
-        iterator++;
-    }
-
-    line_number_str[index] = '\0';
-
-    if (strcmp(line_number_str, "") == 0)
-    {
-        printf("Every line of code needs a line number!\n");
+    if (basic_line == 0)
         return -1;
-    }
     else
-        return (int)strtol(line_number_str, NULL, 10);
+        return basic_line;
 }
 
 struct tokenized_string_t tokenize_string(char *str)
@@ -52,7 +38,9 @@ struct tokenized_string_t tokenize_string(char *str)
     ret.tokens = NULL;
     ret.token_count = 0;
 
-    ret.basic_line = get_basic_line_number(str);
+    char *no_line_str = NULL;
+
+    ret.basic_line = get_basic_line_number(str, &no_line_str);
     if (ret.basic_line == -1)
     {
         ret.err = true;
@@ -60,6 +48,8 @@ struct tokenized_string_t tokenize_string(char *str)
     }
 
     // TODO Rest
+
+    printf("Line Number: %d | String: %s\n", ret.basic_line, no_line_str);
 
     ret.err = false;
     return ret;
