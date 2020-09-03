@@ -27,9 +27,20 @@ static int get_basic_line_number(char *str, char **no_line_string)
     int basic_line = (int)strtol(str, no_line_string, 10);
 
     if (basic_line == 0 && *str != '0')
+    {
+        printf("Every line of code needs line number.\n");
         return -1;
+    }
     else
-        return basic_line;
+    {
+        if (basic_line >= 65529)
+        {
+            printf("Line number out of range (0 -> 65529)\n");
+            return -1;
+        }
+        else
+            return basic_line;
+    }
 }
 
 struct tokenized_string_t tokenize_string(char *str)
