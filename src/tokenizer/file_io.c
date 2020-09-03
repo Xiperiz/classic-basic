@@ -25,12 +25,14 @@
 static void string_into_line_array(char *buffer, struct source_file_t *struct_ptr)
 {
     char *iterator = buffer;
-    struct_ptr->lines = (char **)malloc(10000 * sizeof(char *)); // 10000 is a safe limit for lines of code TODO Make it a 'vector'
+    /* 10000 is a safe limit for lines of code TODO Make it a 'vector' */
+    struct_ptr->lines = (char **)malloc(10000 * sizeof(char *));
     struct_ptr->line_count = 0;
 
     while (true)
     {
-        struct_ptr->lines[struct_ptr->line_count] = (char *)malloc(4096); // 4096 chars is a safe limit for a line of code TODO Make it a 'vector'
+        /* 4096 chars is a safe limit for a line of code TODO Make it a 'vector' */
+        struct_ptr->lines[struct_ptr->line_count] = (char *)malloc(4096);
         int line_pos = 0;
 
         while (*iterator != '\0' && *iterator != '\n')
@@ -104,7 +106,8 @@ void free_source_file_t(struct source_file_t *target)
     /*for (int i = 0; i < target->line_count; i++)
         free(target->lines[i]);*/
 
-    for (int i = 0; i < 10000; i++) // TODO Use upper snipet when lines is vector
+    /* TODO Use upper snipet when lines is vector */
+    for (int i = 0; i < 10000; i++)
         free(target->lines[i]); 
 
     free(target->lines);

@@ -22,7 +22,8 @@
 #include "../helpers/compilers.h"
 #include "node.h"
 
-struct basic_program_node_t * create_program_node(enum node_type_e type, struct token_t *tokens, int token_count, char *literal_line, int basic_line)
+struct basic_program_node_t * create_program_node(enum node_type_e type, struct token_t *tokens, int token_count,
+                                                  char *literal_line, int basic_line)
 {
     struct basic_program_node_t *ret = (struct basic_program_node_t *)malloc(sizeof(struct basic_program_node_t));
 
