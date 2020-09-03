@@ -43,7 +43,7 @@ static int get_basic_line_number(char *str)
         return -1;
     }
     else
-        return atoi(line_number_str);
+        return (int)strtol(line_number_str, NULL, 10);
 }
 
 struct tokenized_string_t tokenize_string(char *str)
@@ -52,14 +52,12 @@ struct tokenized_string_t tokenize_string(char *str)
     ret.tokens = NULL;
     ret.token_count = 0;
 
-    int basic_line = get_basic_line_number(str);
-    if (basic_line == -1)
+    ret.basic_line = get_basic_line_number(str);
+    if (ret.basic_line == -1)
     {
         ret.err = true;
         return ret;
     }
-
-    ret.basic_line = basic_line;
 
     // TODO Rest
 
