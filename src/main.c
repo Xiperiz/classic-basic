@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     }
 
     struct basic_program_node_t *program_start_node = create_program_node(NODE_UNKNOWN, NULL, 0, file_struct->lines[0], 0);
-    printf("NODE! With Line: %s\n", program_start_node->literal_line);
+    printf("Line: %s\n", program_start_node->literal_line);
     if (!update_program_node_from_literal(program_start_node))
     {
         free_source_file_t(file_struct);
@@ -61,11 +61,13 @@ int main(int argc, char **argv)
         return -1;
     }
 
+    printf("Lines: %d\n", file_struct->line_count);
+
     if (file_struct->line_count > 1)
     {
         for (int i = 1; i < file_struct->line_count; i++)
         {
-            printf("NODE! With Line: %s\n", file_struct->lines[i]);
+            printf("Line: %s\n", file_struct->lines[i]);
             struct basic_program_node_t *node = create_program_node(NODE_UNKNOWN, NULL, 0, file_struct->lines[i], 0);
             if (!update_program_node_from_literal(node))
             {

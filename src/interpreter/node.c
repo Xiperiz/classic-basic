@@ -42,25 +42,10 @@ void add_to_program_node_list(struct basic_program_node_t *any_node, struct basi
     while (temp_ptr->next != NULL)
         temp_ptr = temp_ptr->next;
 
-    printf("Moved temp_ptr to node with: %s\n", temp_ptr->literal_line);
-
     temp_ptr->next = node_to_add;
-
-    printf("Linking it with node with: %s\n", node_to_add->literal_line);
 
     node_to_add->previous = temp_ptr;
     node_to_add->next = NULL;
-
-    printf("Printing Linked List\n#####\n");
-    while (temp_ptr->previous != NULL)
-        temp_ptr = temp_ptr->previous;
-
-    while (temp_ptr->next != NULL)
-    {
-        printf("%s\n", temp_ptr->literal_line);
-        temp_ptr = temp_ptr->next;
-    }
-    printf("######\n");
 }
 
 void free_program_node(struct basic_program_node_t *node, bool relink)
@@ -80,7 +65,6 @@ void free_program_node(struct basic_program_node_t *node, bool relink)
     free(node->tokens);
     free(node);
 }
-
 
 void free_program_node_list(struct basic_program_node_t *any_node)
 {
