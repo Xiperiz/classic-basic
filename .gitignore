@@ -1,0 +1,9 @@
+build
+vs
+.vs
+idea
+.idea
+code
+.code
+*.txt
+!CMakeLists.txt
