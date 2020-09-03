@@ -58,9 +58,24 @@ struct tokenized_string_t tokenize_string(char *str)
         return ret;
     }
 
-    // TODO Rest
+    struct token_t tokens_buffer[4096]; // TODO Change to vector
+    int token_index = 0;
 
+    char *iterator = no_line_str;
 
+    /* Move to first non whitespace character */
+    while (isspace(*iterator) != 0)
+        iterator++;
+
+    while (*iterator != '\0')
+    {
+        if (isspace(*iterator) != 0)
+        {
+            // TODO
+        }
+
+        // TODO
+    }
 
     ret.err = false;
     return ret;
