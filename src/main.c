@@ -18,6 +18,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "interpreter/interpreter.h"
 #include "interpreter/node.h"
 #include "helpers/print_info.h"
@@ -51,11 +52,11 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    struct basic_program_node_t *program_head = create_program_node(NODE_UNKNOWN, NULL, 0, file_struct->lines[0], 0);
-    if (!update_program_node_from_literal(program_head))
+    struct basic_program_node_t *program_start_node = create_program_node(NODE_UNKNOWN, NULL, 0, file_struct->lines[0], 0);
+    if (!update_program_node_from_literal(program_start_node))
     {
         free_source_file_t(file_struct);
-        free_program_node_list(program_head);
+        free_program_node_list(program_start_node);
         return -1;
     }
 
@@ -67,16 +68,24 @@ int main(int argc, char **argv)
             if (!update_program_node_from_literal(node))
             {
                 free_source_file_t(file_struct);
-                free_program_node_list(program_head);
+                free_program_node_list(program_start_node);
                 return -1;
             }
 
-            add_to_program_node_list(program_head, node);
+            add_to_program_node_list(program_start_node, node);
         }
     }
 
-    if (!reorder_nodes(program_head))
+    if (!reorder_nodes(program_start_node))
         return -1;
+
+    /* Debug */
+    struct basic_program_node_t *temp_ptr = program_start_node;
+    while (temp_ptr->next != NULL)
+    {
+        printf("%s\n", temp_ptr->literal_line);
+        temp_ptr = temp_ptr->next;
+    }
 
     struct interpreter_t *interpreter = create_interpreter(); // TODO Cmd args etc
 
@@ -86,7 +95,7 @@ int main(int argc, char **argv)
 
     free_interpreter(interpreter);
     free_source_file_t(file_struct);
-    free_program_node_list(program_head);
+    free_program_node_list(program_start_node);
 
     return to_ret;
 }
