@@ -17,17 +17,52 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <ctype.h>
 #include "tokenizer.h"
+
+static int get_basic_line_number(char *str)
+{
+    char *iterator = str;
+    char *line_number_str = (char *)calloc(1024, 1);
+
+    int index = 0;
+    while(isdigit(*iterator) != 0 && *iterator != '\0')
+    {
+        line_number_str[index] = *iterator;
+        index++;
+        iterator++;
+    }
+
+    line_number_str[index] = '\0';
+
+    if (strcmp(line_number_str, "") == 0)
+    {
+        printf("Every line of code needs a line number!\n");
+        return -1;
+    }
+    else
+        return atoi(line_number_str);
+}
 
 struct tokenized_string_t tokenize_string(char *str)
 {
     struct tokenized_string_t ret;
-    (void)str;
-    ret.basic_line = 0;
-    ret.tokens = 0;
     ret.tokens = NULL;
-    ret.err = false;
-    // TODO
+    ret.token_count = 0;
 
+    int basic_line = get_basic_line_number(str);
+    if (basic_line == -1)
+    {
+        ret.err = true;
+        return ret;
+    }
+
+    ret.basic_line = basic_line;
+
+    // TODO Rest
+
+    ret.err = false;
     return ret;
 }
