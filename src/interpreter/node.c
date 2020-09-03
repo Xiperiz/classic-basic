@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "../tokenizer/tokenizer.h"
 #include "../helpers/compilers.h"
@@ -38,12 +39,28 @@ void add_to_program_node_list(struct basic_program_node_t *any_node, struct basi
 {
     struct basic_program_node_t *temp_ptr = any_node;
 
-    // Find last node to link to
     while (temp_ptr->next != NULL)
         temp_ptr = temp_ptr->next;
 
+    printf("Moved temp_ptr to node with: %s\n", temp_ptr->literal_line);
+
     temp_ptr->next = node_to_add;
+
+    printf("Linking it with node with: %s\n", node_to_add->literal_line);
+
     node_to_add->previous = temp_ptr;
+    node_to_add->next = NULL;
+
+    printf("Printing Linked List\n#####\n");
+    while (temp_ptr->previous != NULL)
+        temp_ptr = temp_ptr->previous;
+
+    while (temp_ptr->next != NULL)
+    {
+        printf("%s\n", temp_ptr->literal_line);
+        temp_ptr = temp_ptr->next;
+    }
+    printf("######\n");
 }
 
 void free_program_node(struct basic_program_node_t *node, bool relink)
