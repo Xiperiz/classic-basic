@@ -19,4 +19,17 @@
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
 
+#include <stdbool.h>
+#include "token.h"
+
+struct tokenized_string_t
+{
+    struct token_t *tokens;
+    int token_count;
+    int basic_line;
+    bool err;
+};
+
+struct tokenized_string_t tokenize_string(char *str);
+
 #endif

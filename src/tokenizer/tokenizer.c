@@ -16,4 +16,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdlib.h>
 #include "tokenizer.h"
+
+struct tokenized_string_t tokenize_string(char *str)
+{
+    struct tokenized_string_t ret;
+    (void)str;
+    ret.basic_line = 0;
+    ret.tokens = 0;
+    ret.tokens = NULL;
+    ret.err = false;
+    // TODO
+
+    return ret;
+}
