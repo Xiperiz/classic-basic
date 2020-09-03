@@ -26,7 +26,7 @@ static int get_basic_line_number(char *str, char **no_line_string)
 {
     int basic_line = (int)strtol(str, no_line_string, 10);
 
-    if (basic_line == 0)
+    if (basic_line == 0 && *str != '0')
         return -1;
     else
         return basic_line;
@@ -49,7 +49,7 @@ struct tokenized_string_t tokenize_string(char *str)
 
     // TODO Rest
 
-    printf("Line Number: %d | String: %s\n", ret.basic_line, no_line_str);
+
 
     ret.err = false;
     return ret;
