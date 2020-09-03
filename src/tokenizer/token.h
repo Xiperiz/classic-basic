@@ -24,10 +24,17 @@ enum token_type_e
     UNKNOWN    
 };
 
+struct position_t
+{
+    int x;
+    int y;
+};
+
 struct token_t
 {
     enum token_type_e type;
     char *literal;
+    struct position_t pos;
 };
 
 #endif
