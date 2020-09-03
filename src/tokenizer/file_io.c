@@ -52,7 +52,7 @@ static void string_into_line_array(char *buffer, struct source_file_t *struct_pt
     }
 }
 
-static struct source_file_t * file_to_struct(char *path)
+struct source_file_t * file_to_struct(char *path)
 {
     FILE *src_file = fopen(path, "rb");
     uint64_t f_len = 0;
@@ -109,17 +109,4 @@ void free_source_file_t(struct source_file_t *target)
 
     free(target->lines);
     free(target);
-}
-
-static void reorder_lines(__maybe_unused struct source_file_t *src_struct)
-{
-    // TODO
-}
-
-struct source_file_t * load_source_file(char *path)
-{
-    struct source_file_t* source_data = file_to_struct(path);
-    reorder_lines(source_data);
-
-    return source_data;
 }

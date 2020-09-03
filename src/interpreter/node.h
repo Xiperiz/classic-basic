@@ -50,4 +50,6 @@ void free_program_node_list(struct basic_program_node_t *any_node);
 
 bool update_program_node_from_literal(struct basic_program_node_t *target_node);
 
+bool reorder_nodes(struct basic_program_node_t *any_node);
+
 #endif

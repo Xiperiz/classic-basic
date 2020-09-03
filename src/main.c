@@ -43,7 +43,7 @@ int main(int argc, char **argv)
         }
     }
 
-    struct source_file_t *file_struct = load_source_file(*argv);
+    struct source_file_t *file_struct = file_to_struct(*argv);
 
     if (file_struct->err)
     {
@@ -74,6 +74,9 @@ int main(int argc, char **argv)
             add_to_program_node_list(program_head, node);
         }
     }
+
+    if (!reorder_nodes(program_head))
+        return -1;
 
     struct interpreter_t *interpreter = create_interpreter(); // TODO Cmd args etc
 

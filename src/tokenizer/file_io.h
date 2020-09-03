@@ -28,7 +28,7 @@ struct source_file_t
     bool err;
 };
 
-struct source_file_t * load_source_file(char *path);
+struct source_file_t * file_to_struct(char *path);
 
 void free_source_file_t(struct source_file_t *target);
 

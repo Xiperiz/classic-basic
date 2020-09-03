@@ -91,3 +91,9 @@ bool update_program_node_from_literal(__maybe_unused struct basic_program_node_t
     // TODO Update EVERYTHING in the struct from the provided literal
     return true;
 }
+
+bool reorder_nodes(__maybe_unused struct basic_program_node_t *any_node)
+{
+    // TODO
+    return true;
+}
