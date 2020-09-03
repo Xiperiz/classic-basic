@@ -100,9 +100,10 @@ bool update_program_node_from_literal(struct basic_program_node_t *target_node)
     return true;
 }
 
+/*
 static void add_node_to_the_front(struct basic_program_node_t *any_node, struct basic_program_node_t *node_to_prepend)
 {
-    struct basic_program_node_t *temp_ptr;
+    struct basic_program_node_t *temp_ptr = any_node;
 
     // Move to the front
     while (temp_ptr->previous != NULL)
@@ -115,7 +116,7 @@ static void add_node_to_the_front(struct basic_program_node_t *any_node, struct 
 
 static void add_node_to_the_end(struct basic_program_node_t *any_node, struct basic_program_node_t *node_to_prepend)
 {
-    struct basic_program_node_t *temp_ptr;
+    struct basic_program_node_t *temp_ptr = any_node;
 
     // Move to the front
     while (temp_ptr->next != NULL)
@@ -125,8 +126,9 @@ static void add_node_to_the_end(struct basic_program_node_t *any_node, struct ba
     node_to_prepend->next = NULL;
     node_to_prepend->previous = temp_ptr;
 }
+*/
 
-bool reorder_nodes(struct basic_program_node_t *any_node)
+bool reorder_nodes(__maybe_unused struct basic_program_node_t *any_node)
 {
     // TODO
     return true;
